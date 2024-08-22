@@ -7,14 +7,14 @@ Instructions for project installation
 Go to github and clone in your root dir the proyect repository
 
 ```bash
-git clone https://github.com/rojeliob/c-pull-app
+git clone https://github.com/rojeliob/lemi-app
 ```
 ## Go to proyect directory
 
 After clone go to the new directory of the proyect
 
 ```bash
-cd c-pull-app
+cd lemi-app
 ```
 
 ## Create .env and database
