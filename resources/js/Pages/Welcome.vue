@@ -28,14 +28,14 @@ function handleImageError() {
 
 <template>
   <Head title="Welcome" />
-  <nav class="bg-gray-800">
+  <nav class="">
     <div class="max-w-8xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button
             type="button"
-            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:dark: text-white-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
@@ -84,7 +84,7 @@ function handleImageError() {
         <div
           class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
         >
-          <div class="flex flex-shrink-0 items-center text-white">
+          <div class="flex flex-shrink-0 items-center dark: text-white-50">
             C-PULL
             <!-- <img
               class="h-8 w-auto"
@@ -94,26 +94,26 @@ function handleImageError() {
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <!-- Current: "bg-gray-900 dark: text-white-50", Default: "text-gray-300 hover:bg-gray-700 hover:dark: text-white-50" -->
               <a
                 href="#"
-                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium dark: text-white-50"
                 aria-current="page"
                 >Home</a
               >
               <a
                 href="#"
-                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:dark: text-white-50"
                 >Business</a
               >
               <a
                 href="#"
-                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:dark: text-white-50"
                 >Contact</a
               >
               <a
                 href="#"
-                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:dark: text-white-50"
                 >About us</a
               >
             </div>
@@ -123,7 +123,7 @@ function handleImageError() {
           <Link
             v-if="$page.props.auth.user"
             :href="route('dashboard')"
-            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark: dark: text-white-50-50 dark:hover:dark: text-white-50/80 dark:focus-visible:ring-white"
           >
             Dashboard
           </Link>
@@ -131,7 +131,7 @@ function handleImageError() {
           <template v-else>
             <Link
               :href="route('login')"
-              class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+              class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark: dark: text-white-50-50 dark:hover:dark: text-white-50/80 dark:focus-visible:ring-white"
             >
               Log in
             </Link>
@@ -139,7 +139,7 @@ function handleImageError() {
             <Link
               v-if="canRegister"
               :href="route('register')"
-              class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+              class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark: dark: text-white-50-50 dark:hover:dark: text-white-50/80 dark:focus-visible:ring-white"
             >
               Register
             </Link>
@@ -151,45 +151,48 @@ function handleImageError() {
     <!-- Mobile menu, show/hide based on menu state. -->
     <div class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <!-- Current: "bg-gray-900 dark: text-white-50", Default: "text-gray-300 hover:bg-gray-700 hover:dark: text-white-50" -->
         <a
           href="#"
-          class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+          class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium dark: text-white-50"
           aria-current="page"
           >Dashboard</a
         >
         <a
           href="#"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:dark: text-white-50"
           >Team</a
         >
         <a
           href="#"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:dark: text-white-50"
           >Projects</a
         >
         <a
           href="#"
-          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:dark: text-white-50"
           >Calendar</a
         >
       </div>
     </div>
   </nav>
-  <!-- <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+  <div class="your-element-selector dark:dark: text-white-50-50">
+    This is a test element.
+  </div>
+  <!-- <div class="bg-gray-50 text-black/50 dark:bg-black dark: dark: text-white-50-50/50">
     <img
       id="background"
       class="absolute -left-20 top-0 max-w-[877px]"
       src="https://laravel.com/assets/img/welcome/background.svg"
     />
     <div
-      class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
+      class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:dark: text-white-50"
     > -->
   <!-- <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl"> -->
   <!-- <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
     <div class="flex lg:justify-center lg:col-start-2">
       <svg
-        class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]"
+        class="h-12 w-auto dark: text-white-50 lg:h-16 lg:text-[#FF2D20]"
         viewBox="0 0 62 65"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +207,7 @@ function handleImageError() {
       <Link
         v-if="$page.props.auth.user"
         :href="route('dashboard')"
-        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark: dark: text-white-50-50 dark:hover:dark: text-white-50/80 dark:focus-visible:ring-white"
       >
         Dashboard
       </Link>
@@ -212,7 +215,7 @@ function handleImageError() {
       <template v-else>
         <Link
           :href="route('login')"
-          class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+          class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark: dark: text-white-50-50 dark:hover:dark: text-white-50/80 dark:focus-visible:ring-white"
         >
           Log in
         </Link>
@@ -220,7 +223,7 @@ function handleImageError() {
         <Link
           v-if="canRegister"
           :href="route('register')"
-          class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+          class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark: dark: text-white-50-50 dark:hover:dark: text-white-50/80 dark:focus-visible:ring-white"
         >
           Register
         </Link>
@@ -228,16 +231,16 @@ function handleImageError() {
     </nav>
   </header> -->
   <!-- Home Section -->
-  <section
-    class="container mx-auto p-8 flex flex-wrap lg:flex-nowrap bg-slate-800"
-  >
+  <section class="container mx-auto p-8 flex flex-wrap lg:flex-nowrap">
     <!-- Left Column -->
     <div
       class="flex flex-col justify-center items-center lg:items-start lg:w-1/2 p-4 space-y-4"
     >
       <h1 class="text-4xl font-bold text-teal-400">Liquidez rápida</h1>
-      <h2 class="text-2xl font-semibold text-white">Sin complicaciones</h2>
-      <p class="text-white text-center lg:text-left">
+      <h2 class="text-2xl font-semibold dark: text-white-50">
+        Sin complicaciones
+      </h2>
+      <p class="dark: text-white-50 text-center lg:text-left">
         Facilitamos el acceso a fondos y simplificamos la administración
         financiera de tu empresa.
       </p>
@@ -259,7 +262,7 @@ function handleImageError() {
   </section>
 
   <section class="container mx-auto p-8">
-    <h2 class="text-3xl font-bold text-white text-center mb-8">
+    <h2 class="text-3xl font-bold dark: text-white-50 text-center mb-8">
       Cómo funciona
     </h2>
     <div class="relative">
@@ -271,8 +274,10 @@ function handleImageError() {
           >
             1
           </div>
-          <h3 class="mt-4 text-xl font-semibold text-white">Registrate</h3>
-          <p class="text-white">Completa los datos de tu empresa</p>
+          <h3 class="mt-4 text-xl font-semibold dark: text-white-50">
+            Registrate
+          </h3>
+          <p class="dark: text-white-50">Completa los datos de tu empresa</p>
         </div>
         <!-- Connector Line -->
         <div class="flex-1 border-t-2 border-gray-300 relative">
@@ -287,10 +292,10 @@ function handleImageError() {
           >
             2
           </div>
-          <h3 class="mt-4 text-xl font-semibold text-white">
+          <h3 class="mt-4 text-xl font-semibold dark: text-white-50">
             Sube tus documentos
           </h3>
-          <p class="text-white">¡Solo debes hacerlo una vez!</p>
+          <p class="dark: text-white-50">¡Solo debes hacerlo una vez!</p>
         </div>
         <!-- Connector Line -->
         <div class="flex-1 border-t-2 border-gray-300 relative">
@@ -305,10 +310,10 @@ function handleImageError() {
           >
             3
           </div>
-          <h3 class="mt-4 text-xl font-semibold text-white">
+          <h3 class="mt-4 text-xl font-semibold dark: text-white-50">
             Solicita tu préstamo
           </h3>
-          <p class="text-white">
+          <p class="dark: text-white-50">
             Descubre las condiciones que te ofrece cada entidad bancaria
           </p>
         </div>
@@ -317,7 +322,7 @@ function handleImageError() {
   </section>
 
   <section class="container mx-auto p-8 mt-10">
-    <h2 class="text-4xl font-bold text-white text-center mb-8">
+    <h2 class="text-4xl font-bold dark: text-white-50 text-center mb-8">
       ¡Encuentra la financiación perfecta! Accede a múltiples bancos, compara y
       elige la mejor opción.
     </h2>
@@ -457,7 +462,7 @@ function handleImageError() {
             alt="Sunset in the mountains"
           /> -->
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2 text-white">
+            <div class="font-bold text-xl mb-2 dark: text-white-50">
               The Coldest Sunset
             </div>
             <p class="text-gray-700 text-base">
@@ -480,10 +485,10 @@ function handleImageError() {
           class="bg-gray-600 shadow-lg rounded-lg overflow-hidden flex-1 flex flex-col p-2"
         >
           <div class="p-6 flex-1">
-            <h3 class="text-xl font-bold mb-2 text-white">
+            <h3 class="text-xl font-bold mb-2 dark: text-white-50">
               Solicita financiamiento bancario
             </h3>
-            <p class="text-white">
+            <p class="dark: text-white-50">
               Gestiónalo todo en un solo sitio, presenta toda tu documentación
               de manera simple y rápida
             </p>
@@ -502,10 +507,10 @@ function handleImageError() {
           class="bg-gray-600 shadow-lg rounded-lg overflow-hidden flex-1 flex flex-col p-2"
         >
           <div class="p-6 flex-1">
-            <h3 class="text-xl font-bold mb-2 text-white">
+            <h3 class="text-xl font-bold mb-2 dark: text-white-50">
               Compara las propuestas que recibes
             </h3>
-            <p class="text-white">
+            <p class="dark: text-white-50">
               Obtendrás respuesta a tus solicitudes y podrás comparar
               condiciones para aceptar la propuesta que más se ajuste a tus
               necesidades.
@@ -524,10 +529,10 @@ function handleImageError() {
       <!-- Column 2: Title and Subtitle -->
       <div class="flex items-center justify-center p-8">
         <div class="text-center">
-          <h2 class="text-3xl font-bold mb-2 text-white">
+          <h2 class="text-3xl font-bold mb-2 dark: text-white-50">
             Escala e invierte en tu negocio
           </h2>
-          <p class="text-lg text-white">
+          <p class="text-lg dark: text-white-50">
             Todas tus operaciones en un solo lugar te permitirán tomar
             decisiones inteligentes para tu negocio.
           </p>
@@ -550,7 +555,7 @@ function handleImageError() {
       >
         <div class="sm:col-span-2">
           <h1
-            class="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white"
+            class="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark: dark: text-white-50-50"
           >
             Subscribe our newsletter to get an update.
           </h1>
@@ -561,12 +566,12 @@ function handleImageError() {
             <input
               id="email"
               type="text"
-              class="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+              class="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark: dark: text-white-50-50 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
               placeholder="Email Address"
             />
 
             <button
-              class="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-gray-800 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+              class="w-full px-6 py-2.5 text-sm font-medium tracking-wider dark: text-white-50 transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-gray-800 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
             >
               Subscribe
             </button>
@@ -574,21 +579,23 @@ function handleImageError() {
         </div>
 
         <div>
-          <p class="font-semibold text-gray-800 dark:text-white">Quick Link</p>
+          <p class="font-semibold text-gray-800 dark: dark: text-white-50-50">
+            Quick Link
+          </p>
 
           <div class="flex flex-col items-start mt-5 space-y-2">
             <p
-              class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
+              class="text-gray-600 transition-colors duration-300 dark: dark: text-white-50-50 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
             >
               Home
             </p>
             <p
-              class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
+              class="text-gray-600 transition-colors duration-300 dark: dark: text-white-50-50 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
             >
               Who We Are
             </p>
             <p
-              class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
+              class="text-gray-600 transition-colors duration-300 dark: dark: text-white-50-50 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
             >
               Our Philosophy
             </p>
@@ -596,21 +603,23 @@ function handleImageError() {
         </div>
 
         <div>
-          <p class="font-semibold text-gray-800 dark:text-white">Industries</p>
+          <p class="font-semibold text-gray-800 dark: dark: text-white-50-50">
+            Industries
+          </p>
 
           <div class="flex flex-col items-start mt-5 space-y-2">
             <p
-              class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
+              class="text-gray-600 transition-colors duration-300 dark: dark: text-white-50-50 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
             >
               Retail & E-Commerce
             </p>
             <p
-              class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
+              class="text-gray-600 transition-colors duration-300 dark: dark: text-white-50-50 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
             >
               Information Technology
             </p>
             <p
-              class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
+              class="text-gray-600 transition-colors duration-300 dark: dark: text-white-50-50 dark:hover:text-blue-400 hover:underline hover:cursor-pointer hover:text-blue-500"
             >
               Finance & Insurance
             </p>
@@ -693,7 +702,7 @@ function handleImageError() {
                         <a
                             href="https://laravel.com/docs"
                             id="docs-card"
-                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                            class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:dark: text-white-50/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                         >
                             <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
                                 <img
@@ -735,7 +744,7 @@ function handleImageError() {
                                     </div>
 
                                     <div class="pt-3 sm:pt-5 lg:pt-0">
-                                        <h2 class="text-xl font-semibold text-black dark:text-white">Documentation</h2>
+                                        <h2 class="text-xl font-semibold text-black dark: dark: text-white-50-50">Documentation</h2>
 
                                         <p class="mt-4 text-sm/relaxed">
                                             Laravel has wonderful documentation covering every aspect of the framework.
@@ -763,7 +772,7 @@ function handleImageError() {
 
                         <a
                             href="https://laracasts.com"
-                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:dark: text-white-50/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                         >
                             <div
                                 class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16"
@@ -783,7 +792,7 @@ function handleImageError() {
                             </div>
 
                             <div class="pt-3 sm:pt-5">
-                                <h2 class="text-xl font-semibold text-black dark:text-white">Laracasts</h2>
+                                <h2 class="text-xl font-semibold text-black dark: dark: text-white-50-50">Laracasts</h2>
 
                                 <p class="mt-4 text-sm/relaxed">
                                     Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript
@@ -809,7 +818,7 @@ function handleImageError() {
 
                         <a
                             href="https://laravel-news.com"
-                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
+                            class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:dark: text-white-50/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
                         >
                             <div
                                 class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16"
@@ -835,7 +844,7 @@ function handleImageError() {
                             </div>
 
                             <div class="pt-3 sm:pt-5">
-                                <h2 class="text-xl font-semibold text-black dark:text-white">Laravel News</h2>
+                                <h2 class="text-xl font-semibold text-black dark: dark: text-white-50-50">Laravel News</h2>
 
                                 <p class="mt-4 text-sm/relaxed">
                                     Laravel News is a community driven portal and newsletter aggregating all of the
@@ -880,65 +889,65 @@ function handleImageError() {
                             </div>
 
                             <div class="pt-3 sm:pt-5">
-                                <h2 class="text-xl font-semibold text-black dark:text-white">Vibrant Ecosystem</h2>
+                                <h2 class="text-xl font-semibold text-black dark: dark: text-white-50-50">Vibrant Ecosystem</h2>
 
                                 <p class="mt-4 text-sm/relaxed">
                                     Laravel's robust library of first-party tools and libraries, such as
                                     <a
                                         href="https://forge.laravel.com"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white dark:focus-visible:ring-[#FF2D20]"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50 dark:focus-visible:ring-[#FF2D20]"
                                         >Forge</a
                                     >,
                                     <a
                                         href="https://vapor.laravel.com"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Vapor</a
                                     >,
                                     <a
                                         href="https://nova.laravel.com"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Nova</a
                                     >,
                                     <a
                                         href="https://envoyer.io"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Envoyer</a
                                     >, and
                                     <a
                                         href="https://herd.laravel.com"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Herd</a
                                     >
                                     help you take your projects to the next level. Pair them with powerful open source
                                     libraries like
                                     <a
                                         href="https://laravel.com/docs/billing"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Cashier</a
                                     >,
                                     <a
                                         href="https://laravel.com/docs/dusk"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Dusk</a
                                     >,
                                     <a
                                         href="https://laravel.com/docs/broadcasting"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Echo</a
                                     >,
                                     <a
                                         href="https://laravel.com/docs/horizon"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Horizon</a
                                     >,
                                     <a
                                         href="https://laravel.com/docs/sanctum"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Sanctum</a
                                     >,
                                     <a
                                         href="https://laravel.com/docs/telescope"
-                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white"
+                                        class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:dark: text-white-50"
                                         >Telescope</a
                                     >, and more.
                                 </p>
@@ -947,7 +956,7 @@ function handleImageError() {
                     </div>
                 </main>
 
-                <footer class="py-16 text-center text-sm text-black dark:text-white/70">
+                <footer class="py-16 text-center text-sm text-black dark: dark: text-white-50-50/70">
                     Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
                 </footer> -->
   <!-- </div> -->
