@@ -73,7 +73,7 @@ const MultiselectedValues = ref([]);
 
   <AuthenticatedLayout>
     <div class="mt-20 max-w-7xl mx-auto p-8 rounded-lg dark: bg-violet-900">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
         <h2 class="font-semibold text-xl text-gray-800 dark: text-white-50">
           Mi empresa
         </h2>
@@ -174,7 +174,7 @@ const MultiselectedValues = ref([]);
       </div>
 
       <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
           <div
             class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
           >
@@ -185,12 +185,12 @@ const MultiselectedValues = ref([]);
                   <!-- Step 1 Form -->
                   <form>
                     <!-- Form content for step 1 goes here -->
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto">
                       <div
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
                       >
                         <div
-                          class="p-6 text-gray-900 items-center dark:text-gray-100"
+                          class="text-gray-900 items-center dark:text-gray-100"
                         >
                           <div class="columns-2">
                             <InputLabel
@@ -206,7 +206,7 @@ const MultiselectedValues = ref([]);
                             />
                           </div>
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <div class="text-gray-900 dark:text-gray-100">
                           <div class="columns-2">
                             <InputLabel for="company-name" value="CIF" />
                             <TextInput
@@ -218,7 +218,7 @@ const MultiselectedValues = ref([]);
                             />
                           </div>
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <div class="text-gray-900 dark:text-gray-100">
                           <div class="columns-2">
                             <InputLabel
                               for="company-name"
@@ -233,7 +233,7 @@ const MultiselectedValues = ref([]);
                             />
                           </div>
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <div class="text-gray-900 dark:text-gray-100">
                           <div class="columns-2">
                             <InputLabel for="company-name" value="Empleados" />
                             <NumericInput

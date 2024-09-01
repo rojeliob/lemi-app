@@ -60,7 +60,7 @@ const showingSidebar = ref(true);
           <h3 class="font-poppins">LEMI Finance</h3>
         </Link>
       </div>
-      <nav class="mt-4">
+      <nav class="mt-10">
         <ul class="p-4 space-y-4 dark: text-white-50">
           <li class="bg-violet-500 p-4 rounded-lg">
             <Link

@@ -12,7 +12,7 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class RegisteredUserController extends Controller
+class CustomRegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
