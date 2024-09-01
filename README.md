@@ -38,7 +38,16 @@ npm install
 
 ```bash
 php artisan migrate
+
 ```
+
+## Run seed
+
+```bash
+php artisan db:seed
+
+```
+
 ## Run de proyect
 
 ```bash
