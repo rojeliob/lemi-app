@@ -30,9 +30,11 @@ const goToStep = (step) => {
 // Handle form submission
 const submit = () => {
   if (currentStep.value === 1) {
-    goToStep(2); // Move to Step 2
-  } else {
     form.post(route("register-custom.step1"), {
+      onFinish: () => goToStep(2),
+    });
+  } else {
+    form.post(route("register-custom.step2"), {
       onFinish: () => form.reset("password", "password_confirmation"),
     });
   }
@@ -221,24 +223,6 @@ const submit = () => {
           />
 
           <InputError class="mt-2" :message="form.errors.password" />
-        </div>
-
-        <div class="mt-4">
-          <InputLabel for="password_confirmation" value="Confirm Password" />
-
-          <TextInput
-            id="password_confirmation"
-            type="password"
-            class="mt-1 block w-full"
-            v-model="form.password_confirmation"
-            required
-            autocomplete="new-password"
-          />
-
-          <InputError
-            class="mt-2"
-            :message="form.errors.password_confirmation"
-          />
         </div>
 
         <div class="flex items-center justify-end mt-4">

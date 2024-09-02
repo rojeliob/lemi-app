@@ -8,24 +8,24 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // Home Route
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        // Uncomment if you want to show the registration option
-        // 'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('home');
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         // Uncomment if you want to show the registration option
+//         // 'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// })->name('home');
 
 // Dashboard Route
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
 
 // Registration Routes
 Route::get('/register-custom', [CustomRegisteredUserController::class, 'create'])->name('register-custom');

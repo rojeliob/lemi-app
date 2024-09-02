@@ -27,6 +27,7 @@ class CustomRegisteredUserController extends Controller
      */
     public function storeStep1(Request $request)
     {
+        info($request);
         // Validate step 1 fields
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -47,6 +48,9 @@ class CustomRegisteredUserController extends Controller
      */
     public function storeStep2(Request $request)
     {
+        info($request);
+        info($request->session()->get('registration_data'));
+
         // Validate step 2 fields
         $request->validate([
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -63,6 +67,11 @@ class CustomRegisteredUserController extends Controller
             'email' => $registrationData['email'],
             'phone' => $registrationData['phone'],
             'password' => Hash::make($request->password),
+            'company_name' => $request->company_name,
+            'cif' => $request->cif,
+            'antiquity' => $request->antiquity,
+            'annual_billing' => $request->annual_billing,
+            'password' => $request->password,
         ]);
 
         // Clean up the session
