@@ -8,7 +8,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,11 +28,11 @@ class CustomRegisteredUserController extends Controller
     {
         info($request);
         // Validate step 1 fields
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'numeric', 'digits_between:7,15'],
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|digits_between:10,15',
         ]);
 
         // Store the data in the session or temporary storage
@@ -52,9 +51,12 @@ class CustomRegisteredUserController extends Controller
         info($request->session()->get('registration_data'));
 
         // Validate step 2 fields
-        $request->validate([
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'password_confirmation' => ['required'],
+        $validated = $request->validate([
+            'company_name' => 'required|string|max:255',
+            'cif' => 'required|string|max:50',
+            'antiquity' => 'required|integer|min:0',
+            'annual_billing' => 'required|numeric|min:0',
+            'password' => 'required',
         ]);
 
         // Retrieve the registration data from the session

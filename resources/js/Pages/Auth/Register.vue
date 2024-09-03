@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, reactive, computed } from "vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -22,6 +22,40 @@ const form = useForm({
   password_confirmation: "",
 });
 
+const errors = reactive({});
+
+// Simple client-side validation rules
+const validateStep1 = () => {
+  errors.name = form.name.trim() === "" ? "Name is required." : "";
+  errors.last_name =
+    form.last_name.trim() === "" ? "Last Name is required." : "";
+  errors.email = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
+    ? "A valid email is required."
+    : "";
+  errors.phone = !/^\d+$/.test(form.phone) ? "Phone number is invalid." : "";
+  return !errors.name && !errors.last_name && !errors.email && !errors.phone;
+};
+
+const validateStep2 = () => {
+  errors.company_name =
+    form.company_name.trim() === "" ? "Company Name is required." : "";
+  errors.cif = form.cif.trim() === "" ? "CIF is required." : "";
+  errors.antiquity =
+    form.antiquity.trim() === "" ? "Antiquity is required." : "";
+  errors.annual_billing =
+    form.annual_billing.trim() === "" ? "Annual Billing is required." : "";
+  errors.password =
+    form.password.length < 8 ? "Password must be at least 8 characters." : "";
+
+  return (
+    !errors.company_name &&
+    !errors.cif &&
+    !errors.antiquity &&
+    !errors.annual_billing &&
+    !errors.password
+  );
+};
+
 // Handle step navigation
 const goToStep = (step) => {
   currentStep.value = step;
@@ -30,16 +64,21 @@ const goToStep = (step) => {
 // Handle form submission
 const submit = () => {
   if (currentStep.value === 1) {
-    form.post(route("register-custom.step1"), {
-      onFinish: () => goToStep(2),
-    });
-  } else {
-    form.post(route("register-custom.step2"), {
-      onFinish: () => form.reset("password", "password_confirmation"),
-    });
+    if (validateStep1()) {
+      form.post(route("register-custom.step1"), {
+        onFinish: () => goToStep(2),
+      });
+    }
+  } else if (currentStep.value === 2) {
+    if (validateStep2()) {
+      form.post(route("register-custom.step2"), {
+        onFinish: () => form.reset("password", "password_confirmation"),
+      });
+    }
   }
 };
 </script>
+
 
 <template>
   <GuestLayout>
@@ -103,7 +142,10 @@ const submit = () => {
             autofocus
             autocomplete="name"
           />
-          <InputError class="mt-2" :message="form.errors.name" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.name"
+          />
         </div>
 
         <div class="mt-4">
@@ -116,7 +158,10 @@ const submit = () => {
             required
             autocomplete="family-name"
           />
-          <InputError class="mt-2" :message="form.errors.last_name" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.last_name"
+          />
         </div>
 
         <div class="mt-4">
@@ -129,20 +174,26 @@ const submit = () => {
             required
             autocomplete="username"
           />
-          <InputError class="mt-2" :message="form.errors.email" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.email"
+          />
         </div>
 
         <div class="mt-4">
           <InputLabel for="phone" value="Phone" />
           <TextInput
             id="phone"
-            type="text"
+            type="number"
             class="mt-1 block w-full"
             v-model="form.phone"
             required
             autocomplete="tel"
           />
-          <InputError class="mt-2" :message="form.errors.phone" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.phone"
+          />
         </div>
 
         <div class="flex items-center justify-end mt-4">
@@ -168,7 +219,10 @@ const submit = () => {
             required
             autocomplete="organization"
           />
-          <InputError class="mt-2" :message="form.errors.company_name" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.company_name"
+          />
         </div>
 
         <div class="mt-4">
@@ -181,7 +235,10 @@ const submit = () => {
             required
             autocomplete="cif"
           />
-          <InputError class="mt-2" :message="form.errors.cif" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.cif"
+          />
         </div>
 
         <div class="mt-4">
@@ -194,7 +251,10 @@ const submit = () => {
             required
             autocomplete="antiquity"
           />
-          <InputError class="mt-2" :message="form.errors.antiquity" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.antiquity"
+          />
         </div>
 
         <div class="mt-4">
@@ -207,7 +267,10 @@ const submit = () => {
             required
             autocomplete="annual-billing"
           />
-          <InputError class="mt-2" :message="form.errors.annual_billing" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.annual_billing"
+          />
         </div>
 
         <div class="mt-4">
@@ -222,7 +285,10 @@ const submit = () => {
             autocomplete="new-password"
           />
 
-          <InputError class="mt-2" :message="form.errors.password" />
+          <InputError
+            class="my-2 p-2 bg-primary-400 rounded-md text-center text-white-100"
+            :message="form.errors.password"
+          />
         </div>
 
         <div class="flex items-center justify-end mt-4">
