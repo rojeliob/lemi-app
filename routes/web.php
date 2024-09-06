@@ -28,6 +28,8 @@ Route::get('/dashboard', function () {
 // })->name('dashboard');
 
 // Registration Routes
+Route::get('/', [CustomRegisteredUserController::class, 'create'])->name('register-custom');
+
 Route::get('/register-custom', [CustomRegisteredUserController::class, 'create'])->name('register-custom');
 Route::post('/register-custom/step1', [CustomRegisteredUserController::class, 'storeStep1'])->name('register-custom.step1');
 Route::post('/register-custom/step2', [CustomRegisteredUserController::class, 'storeStep2'])->name('register-custom.step2');

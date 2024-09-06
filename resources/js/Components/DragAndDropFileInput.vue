@@ -76,7 +76,7 @@ watch(model, (newFile) => {
 <template>
   <div>
     <div
-      class="border-2 border-dashed rounded-md p-4 cursor-pointer"
+      class="border-2 border-dashed rounded-md p-4 cursor-pointer mb-2"
       :class="{
         'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark: dark: text-white-50':
           !dragOver,
@@ -109,7 +109,7 @@ watch(model, (newFile) => {
       :disabled="!model || isLoading"
       @click="uploadFile"
     >
-      {{ isLoading ? "Uploading..." : "Upload File" }}
+      <!-- {{ isLoading ? "Uploading..." : "Upload File" }} -->
     </button>
   </div>
 </template>

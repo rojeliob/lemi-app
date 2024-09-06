@@ -41,6 +41,80 @@ const options = ref([
 // Define the selected model value
 const selectedValue = ref("");
 
+const optionsActivities = ref([
+  {
+    value: "Agricultura, ganadería, silvicultura y pesca",
+    label: "Agricultura, ganadería, silvicultura y pesca",
+  },
+  { value: "Industrias extractivas", label: "Industrias extractivas" },
+  { value: "Industria manufacturera", label: "Industria manufacturera" },
+  {
+    value: "Suministro de energía eléctrica, gas, vapor y aire acondicionado",
+    label: "Suministro de energía eléctrica, gas, vapor y aire acondicionado",
+  },
+  {
+    value:
+      "Suministro de agua, actividades de saneamiento, gestión de residuos y descontaminación",
+    label:
+      "Suministro de agua, actividades de saneamiento, gestión de residuos y descontaminación",
+  },
+  { value: "Construcción", label: "Construcción" },
+  {
+    value:
+      "Comercio al por mayor y al por menor; reparación de vehículos de motor y motocicletas",
+    label:
+      "Comercio al por mayor y al por menor; reparación de vehículos de motor y motocicletas",
+  },
+  {
+    value: "Transporte y almacenamiento",
+    label: "Transporte y almacenamiento",
+  },
+  {
+    value: "Transporte y almacenamiento",
+    label: "Transporte y almacenamiento",
+  },
+  {
+    value: "Información y comunicaciones",
+    label: "Información y comunicaciones",
+  },
+  {
+    value: "Actividades financieras y de seguros",
+    label: "Actividades financieras y de seguros",
+  },
+  { value: "Actividades inmobiliarias", label: "Actividades inmobiliarias" },
+  {
+    value: "Actividades profesionales, científicas y técnicas",
+    label: "Actividades profesionales, científicas y técnicas",
+  },
+  {
+    value: "Actividades administrativas y servicios auxiliares",
+    label: "Actividades administrativas y servicios auxiliares",
+  },
+  {
+    value: "Administración Pública y defensa; Seguridad Social obligatoria",
+    label: "Administración Pública y defensa; Seguridad Social obligatoria",
+  },
+  { value: "Educación", label: "Educación" },
+  {
+    label: "Actividades sanitarias y de servicios sociales",
+    value: "Actividades sanitarias y de servicios sociales",
+  },
+  {
+    label: "Actividades artísticas, recreativas y de entretenimiento",
+    value: "Actividades artísticas, recreativas y de entretenimiento",
+  },
+  { label: "Otros servicios", value: "Otros servicios" },
+  {
+    label: "Actividades de los hogares como empleadores de personal doméstico",
+    value: "Actividades de los hogares como empleadores de personal doméstico",
+  },
+  {
+    label: "Actividades de organizaciones y organismos extraterritoriales",
+    value: "Actividades de organizaciones y organismos extraterritoriales",
+  },
+  { label: "Otras actividades", value: "Otras actividades" },
+]);
+
 // Options for the MultiSelect component
 const multiSelectOptions = ref([
   { id: 1, name: "BBVA" },
@@ -185,64 +259,85 @@ const MultiselectedValues = ref([]);
                   <!-- Step 1 Form -->
                   <form>
                     <!-- Form content for step 1 goes here -->
-                    <div class="max-w-7xl mx-auto">
+                    <div class="max-w-7xl mx-auto columns-2">
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5"
                       >
                         <div
                           class="text-gray-900 items-center dark:text-gray-100"
                         >
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Nombre empresa"
-                            />
-                            <TextInput
-                              id="company-name"
-                              type="text"
-                              class="mt-1 block w-full"
-                              required
-                              autofocus
-                            />
-                          </div>
+                          <InputLabel
+                            for="company-name"
+                            value="Actividad de la empresa "
+                          />
+                          <Select
+                            v-model="selectedValue"
+                            :options="optionsActivities"
+                          />
                         </div>
+
                         <div class="text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel for="company-name" value="CIF" />
-                            <TextInput
-                              id="company-name"
-                              type="text"
-                              class="mt-1 block w-full"
-                              required
-                              autofocus
-                            />
-                          </div>
+                          <InputLabel for="company-name" value="Empleados" />
+                          <NumericInput
+                            id="company-name"
+                            class="mt-1 block w-full"
+                            required
+                            autofocus
+                          />
                         </div>
+
                         <div class="text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Explicacion del negocio"
-                            />
-                            <TextAreaInput
-                              id="company-name"
-                              type="company-name"
-                              class="mt-1 block w-full"
-                              required
-                              autofocus
-                            />
-                          </div>
+                          <InputLabel
+                            for="company-name"
+                            value="Explicacion del negocio"
+                          />
+                          <TextAreaInput
+                            id="company-name"
+                            type="company-name"
+                            class="mt-1 block w-full"
+                            required
+                            autofocus
+                          />
                         </div>
-                        <div class="text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel for="company-name" value="Empleados" />
-                            <NumericInput
-                              id="company-name"
-                              class="mt-1 block w-full"
-                              required
-                              autofocus
-                            />
-                          </div>
+                      </div>
+                      <div
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
+                      >
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Impuestos de sociedades de los últimos dos años"
+                          />
+                          <DragAndDropFileInput
+                            name="sociedades_y_auditorias"
+                          />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Balance y cuenta de resultados del ejercicio en curso"
+                          />
+                          <DragAndDropFileInput
+                            name="balance_resultados_provisional"
+                          />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Pool bancario (relación de deudas bancarias de la empresa)"
+                          />
+                          <DragAndDropFileInput name="pool_bancario" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel for="company-name" value="CIRBE" />
+                          <DragAndDropFileInput name="pool_bancario" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Resumen de IVAs del último año e IVAs del año en curso"
+                          />
+                          <DragAndDropFileInput name="pool_bancario" />
                         </div>
                       </div>
                     </div>
@@ -255,7 +350,7 @@ const MultiselectedValues = ref([]);
                   <form>
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5"
                       >
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                           <div class="columns-2">
@@ -387,7 +482,7 @@ const MultiselectedValues = ref([]);
                     <!-- Form content for step 3 goes here -->
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5"
                       >
                         <div class="p-6 text-gray-900 dark:text-gray-100">
                           <div class="columns-2">

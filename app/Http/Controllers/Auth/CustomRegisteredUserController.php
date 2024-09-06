@@ -64,10 +64,10 @@ class CustomRegisteredUserController extends Controller
 
         // Create the user
         $user = User::create([
-            'name' => $registrationData['name'],
-            'last_name' => $registrationData['last_name'],
-            'email' => $registrationData['email'],
-            'phone' => $registrationData['phone'],
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'company_name' => $request->company_name,
             'cif' => $request->cif,

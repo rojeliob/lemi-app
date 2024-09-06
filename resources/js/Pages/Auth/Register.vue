@@ -8,6 +8,7 @@ import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const currentStep = ref(1);
+const showSuccessPopup = ref(false);
 
 const form = useForm({
   name: "",
@@ -73,6 +74,9 @@ const submit = () => {
     if (validateStep2()) {
       form.post(route("register-custom.step2"), {
         onFinish: () => form.reset("password", "password_confirmation"),
+        onSuccess: () => {
+          showSuccessPopup.value = true;
+        },
       });
     }
   }
@@ -302,5 +306,20 @@ const submit = () => {
         </div>
       </div>
     </form>
+    <!-- Success Popup -->
+    <div
+      v-if="showSuccessPopup"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+        <h2 class="text-2xl font-bold mb-4">Registration Successful!</h2>
+        <p class="mb-6">
+          You have successfully registered. Please log in to continue.
+        </p>
+        <PrimaryButton @click="() => (showSuccessPopup.value = false)">
+          OK
+        </PrimaryButton>
+      </div>
+    </div>
   </GuestLayout>
 </template>
