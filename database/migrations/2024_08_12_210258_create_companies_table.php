@@ -12,8 +12,8 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('company_name');
             $table->string('cif');
-            $table->text('business_description')->nullable();
-            $table->integer('employees')->nullable();
+            $table->integer('antiquity')->nullable();
+            $table->integer('annual_billing')->nullable();
             $table->timestamps();
         });
     }

@@ -10,8 +10,8 @@ import MoneyInput from "@/Components/MoneyInput.vue";
 import DatePicker from "@/Components/DatePicker.vue";
 import DragAndDropFileInput from "@/Components/DragAndDropFileInput.vue";
 import MultiSelect from "@/Components/MultiSelect.vue";
-
 import { ref } from "vue";
+import axios from "axios";
 
 // Track the current step
 const currentStep = ref(1);
@@ -40,7 +40,7 @@ const options = ref([
 
 // Define the selected model value
 const selectedValue = ref("");
-
+const isTouched = ref(false);
 const optionsActivities = ref([
   {
     value: "Agricultura, ganadería, silvicultura y pesca",
@@ -140,6 +140,39 @@ const MultiselectedValues = ref([]);
 //     [1, 2, 3].includes(option.id)
 //   );
 // };
+const debounce = (func, delay) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), delay);
+  };
+};
+
+// Debounce the saveData function to prevent excessive calls
+const saveData = debounce(async () => {
+  if (!isTouched.value) return; // Only save if the input has been touched
+
+  try {
+    const response = await axios.post(route("save-data"), {
+      employeeCount: employeeCount.value,
+      // Include other fields as needed
+    });
+    console.log("Data saved successfully:", response.data);
+  } catch (error) {
+    console.error(
+      "Error saving data:",
+      error.response ? error.response.data : error.message
+    );
+  }
+}, 500); // Adjust debounce delay as needed
+
+const handleBlur = () => {
+  saveData(); // Call the debounced saveData function when the input loses focus
+};
+
+const handleInput = () => {
+  isTouched.value = true; // Mark input as touched when user starts typing
+};
 </script>
 
 <template>
@@ -261,28 +294,32 @@ const MultiselectedValues = ref([]);
                     <!-- Form content for step 1 goes here -->
                     <div class="max-w-7xl mx-auto columns-2">
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5 mr-20"
                       >
                         <div
                           class="text-gray-900 items-center dark:text-gray-100"
                         >
                           <InputLabel
                             for="company-name"
-                            value="Actividad de la empresa "
+                            value="Actividad de la empresa"
                           />
                           <Select
                             v-model="selectedValue"
                             :options="optionsActivities"
+                            @blur="handleBlur"
+                            @input="handleInput"
                           />
                         </div>
 
                         <div class="text-gray-900 dark:text-gray-100">
                           <InputLabel for="company-name" value="Empleados" />
                           <NumericInput
-                            id="company-name"
+                            id="employeeCount"
                             class="mt-1 block w-full"
                             required
                             autofocus
+                            @blur="handleBlur"
+                            @input="handleInput"
                           />
                         </div>
 
@@ -297,20 +334,20 @@ const MultiselectedValues = ref([]);
                             class="mt-1 block w-full"
                             required
                             autofocus
+                            @blur="handleBlur"
+                            @input="handleInput"
                           />
                         </div>
                       </div>
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg ml-20"
                       >
                         <div class="text-gray-900 dark:text-gray-100 space-y-2">
                           <InputLabel
                             for="company-name"
                             value="Impuestos de sociedades de los últimos dos años"
                           />
-                          <DragAndDropFileInput
-                            name="sociedades_y_auditorias"
-                          />
+                          <DragAndDropFileInput name="corporate_taxes" />
                         </div>
                         <div class="text-gray-900 dark:text-gray-100 space-y-2">
                           <InputLabel
@@ -318,7 +355,7 @@ const MultiselectedValues = ref([]);
                             value="Balance y cuenta de resultados del ejercicio en curso"
                           />
                           <DragAndDropFileInput
-                            name="balance_resultados_provisional"
+                            name="balance_sheet_current_year"
                           />
                         </div>
                         <div class="text-gray-900 dark:text-gray-100 space-y-2">
@@ -326,18 +363,18 @@ const MultiselectedValues = ref([]);
                             for="company-name"
                             value="Pool bancario (relación de deudas bancarias de la empresa)"
                           />
-                          <DragAndDropFileInput name="pool_bancario" />
+                          <DragAndDropFileInput name="bank_debt_summary" />
                         </div>
                         <div class="text-gray-900 dark:text-gray-100 space-y-2">
                           <InputLabel for="company-name" value="CIRBE" />
-                          <DragAndDropFileInput name="pool_bancario" />
+                          <DragAndDropFileInput name="cirbe" />
                         </div>
                         <div class="text-gray-900 dark:text-gray-100 space-y-2">
                           <InputLabel
                             for="company-name"
                             value="Resumen de IVAs del último año e IVAs del año en curso"
                           />
-                          <DragAndDropFileInput name="pool_bancario" />
+                          <DragAndDropFileInput name="vat_summary" />
                         </div>
                       </div>
                     </div>
@@ -348,127 +385,53 @@ const MultiselectedValues = ref([]);
                 <div v-if="currentStep === 2">
                   <!-- Step 2 Form -->
                   <form>
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto columns-2">
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5 mr-20"
                       >
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Impuestos de sociedades de dos ejercicios y auditorías"
-                            />
-                            <DragAndDropFileInput
-                              name="sociedades_y_auditorias"
-                            />
-                          </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="CIF de la empresa"
+                          />
+                          <DragAndDropFileInput
+                            name="sociedades_y_auditorias"
+                          />
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Balance y cuenta de resultados provisional del año en curso."
-                            />
-                            <DragAndDropFileInput
-                              name="balance_resultados_provisional"
-                            />
-                          </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Escrituras de constitución y apoderamiento"
+                          />
+                          <DragAndDropFileInput
+                            name="balance_resultados_provisional"
+                          />
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Liquidaciones periódicas de IVA del año anterior y el año en curso."
-                            />
-                            <DragAndDropFileInput name="liquidaciones_iva" />
-                          </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Acta de titularidad real"
+                          />
+                          <DragAndDropFileInput name="liquidaciones_iva" />
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Liquidaciones de IRPF del año anterior y el año en curso."
-                            />
-                            <DragAndDropFileInput name="liquidaciones_irpf" />
-                          </div>
+                      </div>
+
+                      <div
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5 ml-20"
+                      >
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Licencias y permisos necesarios para la actividad"
+                          />
+                          <DragAndDropFileInput name="liquidaciones_irpf" />
                         </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Modelo 390 del año anterior, si existe obligación de presentación."
-                            />
-                            <DragAndDropFileInput name="modelo_390" />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Modelo 347 del año anterior, si existe obligación de presentación."
-                            />
-                            <DragAndDropFileInput name="modelo_347" />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Pool bancario."
-                            />
-                            <DragAndDropFileInput name="pool_bancario" />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Certificados de corriente de pago Seguridad Social y Hacienda."
-                            />
-                            <DragAndDropFileInput
-                              name="certificados_corriente"
-                            />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Declaración de bienes de la empresa, si tiene activos."
-                            />
-                            <DragAndDropFileInput name="declaracion_bienes" />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Certificación negativa del Registro Mercantil"
-                            />
-                            <DragAndDropFileInput
-                              name="certificacion_negativa"
-                            />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Escrituras de constitución y apoderamiento"
-                            />
-                            <DragAndDropFileInput
-                              name="escrituras_constitucion"
-                            />
-                          </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
-                          <div class="columns-2">
-                            <InputLabel
-                              for="company-name"
-                              value="Acta de titularidad real"
-                            />
-                            <DragAndDropFileInput name="acta_titularidad" />
-                          </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Certificación negativa del Registro Mercantil"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
                         </div>
                       </div>
                     </div>
@@ -480,11 +443,11 @@ const MultiselectedValues = ref([]);
                   <!-- Step 3 Form -->
                   <form>
                     <!-- Form content for step 3 goes here -->
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto columns-2">
                       <div
-                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5"
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5 mr-20"
                       >
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <!-- <div class="p-6 text-gray-900 dark:text-gray-100">
                           <div class="columns-2">
                             <InputLabel
                               for="company-name"
@@ -495,8 +458,8 @@ const MultiselectedValues = ref([]);
                               :options="options"
                             />
                           </div>
-                        </div>
-                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                        </div> -->
+                        <!-- <div class="p-6 text-gray-900 dark:text-gray-100">
                           <div class="columns-2">
                             <InputLabel for="company-name" value="Monto" />
                             <NumericInput
@@ -554,6 +517,60 @@ const MultiselectedValues = ref([]);
                               ref="multiSelect"
                             />
                           </div>
+                        </div> -->
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel for="company-name" value="Modelo 347" />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel for="company-name" value="Modelo 349" />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Liquidaciones periódicas de IVA del año anterior y el año en curso"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Liquidaciones de IRPF del año anterior y el año en curso"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                      </div>
+                      <div
+                        class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg space-y-5 ml-20"
+                      >
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Modelo 390 del año anterior, si existe obligación de presentación"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Modelo 347 del año anterior, si existe obligación de presentación"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Certificados de corriente de pago Seguridad Social y Hacienda"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
+                        </div>
+                        <div class="text-gray-900 dark:text-gray-100 space-y-2">
+                          <InputLabel
+                            for="company-name"
+                            value="Declaración de bienes de la empresa, si tiene activos"
+                          />
+                          <DragAndDropFileInput name="modelo_390" />
                         </div>
                       </div>
                     </div>

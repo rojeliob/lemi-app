@@ -78,7 +78,7 @@ watch(model, (newFile) => {
     <div
       class="border-2 border-dashed rounded-md p-4 cursor-pointer mb-2"
       :class="{
-        'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark: dark: text-white-50':
+        'border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark: dark: text-turquoise-500':
           !dragOver,
         'border-indigo-500 dark:border-indigo-600 bg-indigo-50 dark:bg-indigo-800':
           dragOver,

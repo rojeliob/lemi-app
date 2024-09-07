@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('last_name')->after('name');
             $table->string('phone')->after('email');
-            $table->string('company_name')->after('phone');  // New field
-            $table->string('cif')->after('company_name');    // New field
-            $table->string('antiquity')->after('cif');       // New field
-            $table->string('annual_billing')->after('antiquity'); // New field
+            // $table->string('company_name')->after('phone');  // New field
+            // $table->string('cif')->after('company_name');    // New field
+            // $table->string('antiquity')->after('cif');       // New field
+            // $table->string('annual_billing')->after('antiquity'); // New field
         });
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\CustomRegisteredUserController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -29,7 +30,6 @@ Route::get('/dashboard', function () {
 
 // Registration Routes
 Route::get('/', [CustomRegisteredUserController::class, 'create'])->name('register-custom');
-
 Route::get('/register-custom', [CustomRegisteredUserController::class, 'create'])->name('register-custom');
 Route::post('/register-custom/step1', [CustomRegisteredUserController::class, 'storeStep1'])->name('register-custom.step1');
 Route::post('/register-custom/step2', [CustomRegisteredUserController::class, 'storeStep2'])->name('register-custom.step2');
@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/upload', [FileUploadController::class, 'upload'])->name('upload');
+    Route::post('/save-data', [DataController::class, 'store'])->name('save-data');
 });
 
 // Include authentication routes

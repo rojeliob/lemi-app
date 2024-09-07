@@ -10,24 +10,19 @@ class CreateFinancialInformationTable extends Migration
     {
         Schema::create('financial_information', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
-            $table->text('corporate_tax_year_1')->nullable();
-            $table->text('corporate_tax_year_2')->nullable();
-            $table->text('audits')->nullable();
-            $table->text('balance_sheet_income_statement')->nullable();
-            $table->text('vat_returns_previous_year')->nullable();
-            $table->text('vat_returns_current_year')->nullable();
-            $table->text('income_tax_returns_previous_year')->nullable();
-            $table->text('income_tax_returns_current_year')->nullable();
-            $table->text('model_390_previous_year')->nullable();
-            $table->text('model_347_previous_year')->nullable();
-            $table->text('bank_pool')->nullable();
-            $table->text('payment_certificates_social_security_taxes')->nullable();
-            $table->text('company_assets_declaration')->nullable();
-            $table->text('negative_certification_registry')->nullable();
-            $table->text('incorporation_powers_of_attorney')->nullable();
-            $table->text('real_ownership_act')->nullable();
+            $table->unsignedBigInteger('company_id'); // Foreign key for the company
+            $table->string('company_activity')->nullable(); // Dropdown - company activity
+            $table->string('business_description')->nullable(); // Alphanumeric - business description
+            $table->integer('number_of_employees')->nullable(); // Numeric - number of employees
+            $table->string('corporate_taxes')->nullable(); // File (PDF, DOC) - corporate taxes of last 2 years
+            $table->string('balance_sheet_current_year')->nullable(); // File (PDF, DOC) - balance sheet & results of current year
+            $table->string('bank_debt_summary')->nullable(); // File (PDF, DOC) - bank debt relationship (pool)
+            $table->string('cirbe')->nullable(); // File (PDF, DOC) - CIRBE
+            $table->string('vat_summary')->nullable(); // File (PDF, DOC) - VAT summary of last year and current year
             $table->timestamps();
+
+            // Adding the foreign key constraint for company_id
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
 

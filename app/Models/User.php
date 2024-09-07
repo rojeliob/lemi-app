@@ -27,6 +27,7 @@ class User extends Authenticatable
         'antiquity',
         'annual_billing',
         'password',
+        'company_id',
     ];
 
     /**
@@ -50,5 +51,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

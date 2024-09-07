@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Company;
+use App\Models\User;  // Add this line to include the Company model
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,6 @@ class CustomRegisteredUserController extends Controller
      */
     public function storeStep1(Request $request)
     {
-        info($request);
         // Validate step 1 fields
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -47,33 +47,34 @@ class CustomRegisteredUserController extends Controller
      */
     public function storeStep2(Request $request)
     {
-        info($request);
-        info($request->session()->get('registration_data'));
-
         // Validate step 2 fields
         $validated = $request->validate([
             'company_name' => 'required|string|max:255',
             'cif' => 'required|string|max:50',
             'antiquity' => 'required|integer|min:0',
             'annual_billing' => 'required|numeric|min:0',
-            'password' => 'required',
+            'password' => 'required|string|min:8',
         ]);
 
         // Retrieve the registration data from the session
         $registrationData = $request->session()->get('registration_data');
 
-        // Create the user
-        $user = User::create([
-            'name' => $request->name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
+        // Create the company first
+        $company = Company::create([
             'company_name' => $request->company_name,
             'cif' => $request->cif,
             'antiquity' => $request->antiquity,
             'annual_billing' => $request->annual_billing,
-            'password' => $request->password,
+        ]);
+
+        // Create the user and associate the company
+        $user = User::create([
+            'name' => $registrationData['name'],
+            'last_name' => $registrationData['last_name'],
+            'email' => $registrationData['email'],
+            'phone' => $registrationData['phone'],
+            'password' => Hash::make($request->password),
+            'company_id' => $company->id,  // Associate the user with the company
         ]);
 
         // Clean up the session
@@ -86,6 +87,6 @@ class CustomRegisteredUserController extends Controller
         Auth::login($user);
 
         // Redirect to the dashboard
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('dashboard');
     }
 }
